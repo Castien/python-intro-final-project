@@ -42,38 +42,48 @@
 
 import requests
 
-API_URL = "https://openlibrary.org/search.json"  # Replace with your chosen API endpoint
+# Replace with your chosen API endpoint
+API_URL = "https://openlibrary.org/search.json"  
 
-
-def fetch_data():
+# Fetch Data:
+# User input for record search.
+# Send request to Open Library.
+# Get JSON response.
+# Return raw data.
+# Handle network/API exceptions with try/except.
+    
+def fetch_data(author):
     """Fetch data from the API. Returns the raw JSON response, or an empty list on failure."""
     try:
-        response = requests.get(API_URL)
+        response = requests.get(API_URL, params={"author": author})
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error: could not fetch data. {e}")
         return []
 
+data = fetch_data("J.R.R. Tolkien")
+print(data["docs"][0])
 
-def process_data(data):
-    """Extract and transform the fields you need. Returns a list of dictionaries."""
-    pass
-
-
-def display_results(results):
-    """Print results to the terminal in a readable format."""
-    pass
+# def process_data(data):
+#     """Extract and transform the fields you need. Returns a list of dictionaries."""
+#     pass
 
 
-def main():
-    data = fetch_data()
-    if not data:
-        return
-
-    records = process_data(data)
-    display_results(records)
+# def display_results(results):
+#     """Print results to the terminal in a readable format."""
+#     pass
 
 
-if __name__ == "__main__":
-    main()
+# def main():
+#     data = fetch_data()
+#     if not data:
+#         return
+
+#     records = process_data(data)
+
+#     display_results(records)
+
+
+# if __name__ == "__main__":
+#     main()
