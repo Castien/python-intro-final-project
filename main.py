@@ -81,25 +81,30 @@ def process_data(data):
 # data = fetch_data("J.R.R. Tolkien")
 # print(data["docs"][0])
 
-data = fetch_data("J.R.R. Tolkien")
-books = process_data(data)
-print(books)
+# data = fetch_data("J.R.R. Tolkien")
+# books = process_data(data)
+# print(books)
+
+def display_results(results):
+    """Print results to the terminal in a readable format."""
+    for book in results:
+        print(f"Title: {book['title']}")
+        print(f"Author: {book['author']}")
+        print(f"Year: {book['year']}")
+        print(f"Editions: {book['editions']}")
+        print(f"Languages: {book['languages']}")
+        print()
+
+def main():
+    author = input("Enter an author's name: ")
+    data = fetch_data(author)
+    if not data:
+        return
+
+    records = process_data(data)
+
+    display_results(records)
 
 
-# def display_results(results):
-#     """Print results to the terminal in a readable format."""
-#     pass
-
-
-# def main():
-#     data = fetch_data()
-#     if not data:
-#         return
-
-#     records = process_data(data)
-
-#     display_results(records)
-
-
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
