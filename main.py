@@ -68,8 +68,12 @@ def process_data(data):
     books = []
     for book in data.get("docs", []):
         book_data = {
-            "title": book.get("title", "N/A")
-        }
+            "title": book.get("title", "N/A"),
+            "author": book.get("author_name", ["N/A"])[0],
+            "year": book.get("first_publish_year", "N/A"),
+            "editions": book.get("edition_count", "N/A"),
+            "languages": book.get("language", ["N/A"])
+}
         books.append(book_data)
     return books
 
