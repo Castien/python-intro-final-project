@@ -19,8 +19,8 @@
 # title
 # author_name (list)
 # first_publish_year
-# number_of_pages_median
-# subject (list)
+# edition_count
+# language (list)
 
 # 4. What can a user do with your CLI? 
 #    Describe the one core interaction in one sentence. 
@@ -44,14 +44,7 @@ import requests
 
 # Replace with your chosen API endpoint
 API_URL = "https://openlibrary.org/search.json"  
-
-# Fetch Data:
-# User input for record search.
-# Send request to Open Library.
-# Get JSON response.
-# Return raw data.
-# Handle network/API exceptions with try/except.
-    
+ 
 def fetch_data(author):
     """Fetch data from the API. Returns the raw JSON response, or an empty list on failure."""
     try:
@@ -73,17 +66,9 @@ def process_data(data):
             "year": book.get("first_publish_year", "N/A"),
             "editions": book.get("edition_count", "N/A"),
             "languages": book.get("language", ["N/A"])
-}
+        }
         books.append(book_data)
     return books
-
-# Testing
-# data = fetch_data("J.R.R. Tolkien")
-# print(data["docs"][0])
-
-# data = fetch_data("J.R.R. Tolkien")
-# books = process_data(data)
-# print(books)
 
 def display_results(results):
     """Print results to the terminal in a readable format."""
@@ -97,8 +82,12 @@ def display_results(results):
 
 def main():
     author = input("Enter an author's name: ")
+    if not author:
+        print("Please enter an author's name.")
+        return
     data = fetch_data(author)
     if not data:
+        print("No results found.")
         return
 
     records = process_data(data)
