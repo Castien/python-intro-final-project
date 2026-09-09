@@ -62,12 +62,24 @@ def fetch_data(author):
         print(f"Error: could not fetch data. {e}")
         return []
 
-data = fetch_data("J.R.R. Tolkien")
-print(data["docs"][0])
 
-# def process_data(data):
-#     """Extract and transform the fields you need. Returns a list of dictionaries."""
-#     pass
+
+def process_data(data):
+    books = []
+    for book in data.get("docs", []):
+        book_data = {
+            "title": book.get("title", "N/A")
+        }
+        books.append(book_data)
+    return books
+
+# Testing
+# data = fetch_data("J.R.R. Tolkien")
+# print(data["docs"][0])
+
+data = fetch_data("J.R.R. Tolkien")
+books = process_data(data)
+print(books)
 
 
 # def display_results(results):
