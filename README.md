@@ -1,42 +1,85 @@
-# [Project Title]
+# Open Library Book Search
 
-A brief one- or two-sentence description of what this program does.
+A command-line program that uses the Open Library API to search for books by author. The program displays information about each matching book, including its title, author, publication year, edition count, and available languages.
 
-## API
+# API
 
-This project uses the [API Name](https://api-url-here.com) API.
+This project uses the [Open Library Search API](https://openlibrary.org/developers/api).
 
-## Installation
+The program uses the search endpoint:
+
+`https://openlibrary.org/search.json`
+
+The author's name is passed as a query parameter.
+
+# Installation
 
 1. Clone this repository:
+
    ```bash
-   git clone https://github.com/your-username/python-intro-final-project.git
+   git clone git@github.com:Castien/python-intro-final-project.git
    cd python-intro-final-project
    ```
 
 2. Create and activate a virtual environment:
+
    ```bash
    python -m venv .venv
-   source .venv/bin/activate      # macOS/Linux
-   # .venv\Scripts\activate       # Windows
+   ```
+
+   On macOS/Linux:
+
+   ```bash
+   source .venv/bin/activate
+   ```
+
+   On Windows:
+
+   ```bash
+   .venv\Scripts\activate
    ```
 
 3. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
 
-## Usage
+# Usage
+
+Run the program from the project directory:
 
 ```bash
 python main.py
 ```
 
-Describe what happens when the program runs — what prompt(s) appear and what the user can do.
+The program prompts the user to enter an author's name. The program sends the author name to the Open Library API and displays information about the books returned by the search.
 
-## CLI Interactions
+If no author is entered, the program asks the user to enter an author's name. API connection errors are handled without crashing the program.
 
-Describe each interaction your CLI supports. For example:
+# CLI Interactions
 
-- **Filter by region** — enter a region name to see all matching records
-- **Look up by name** — enter a name to see details for one specific record
+* **Search by author** — enter an author's name to see a list of books associated with that author.
+* **Empty input** — if no author is entered, the program displays a message asking the user to provide an author's name.
+
+# Data Cleaning Decisions
+
+The program cleans the OpenLibrary API data, and then displays and exports the results.
+If a title is missing, the author's name is used as the title. 
+If the author is missing, it is replaced with "Unknown". 
+Missing or invalid publication years and edition counts are replaced with 0 to maintain int type.
+The languages field is not included in the cleaned CSV.
+
+# Extension
+
+The program cleans the book data and exports the results to a CSV file. 
+The cleaned CSV contains the fields title, author, year, and editions. 
+The CSV file is created in an output directory using Python's csv and os standard-library modules.
+
+# Project Option
+
+This project uses Option B: Clean, Process, and Export API Data.
+
+# Video Reflection
+
+Video link: [[(https://www.loom.com/share/ed594bfba379470589c5019ba925c739)]
