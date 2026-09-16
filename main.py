@@ -68,8 +68,36 @@ def process_data(data):
         books.append(book_data)
     return books
 
-def is_valid(book):
-    return book["title"] != "N/A"
+# title	: If missing, use the author name as the title
+# author : If missing, use "Unknown"
+# year : If missing or invalid, use 0
+# editions : If missing or invalid, use 0
+# languages : Leave out of the CSV
+
+def clean_data(records):
+    cleaned_records = []
+
+    for book in records:
+        title = book["title"]
+        author = book["author"]
+
+        if title == "N/A":
+            title = author
+
+        if author == "N/A":
+            author = "Unknown"
+
+        cleaned_book = {
+            "title": title,
+            "author": author
+        }
+
+        cleaned_records.append(cleaned_book)
+
+    return cleaned_records
+
+# def is_valid(book):
+#     return book["title"] != "N/A"
 
 def display_results(results):
     """Print results to the terminal in a readable format."""
