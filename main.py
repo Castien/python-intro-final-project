@@ -55,8 +55,6 @@ def fetch_data(author):
         print(f"Error: could not fetch data. {e}")
         return []
 
-
-
 def process_data(data):
     books = []
     for book in data.get("docs", []):
@@ -69,6 +67,9 @@ def process_data(data):
         }
         books.append(book_data)
     return books
+
+def is_valid(book):
+    return book["title"] != "N/A"
 
 def display_results(results):
     """Print results to the terminal in a readable format."""
