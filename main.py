@@ -91,9 +91,19 @@ def clean_data(records):
 
         if year == "N/A":
             year = 0
+        else:
+            try:
+                year = int(year)
+            except ValueError:
+                year = 0
 
         if editions == "N/A":
             editions = 0
+        else:
+            try:
+                editions = int(editions)
+            except ValueError:
+                editions = 0
 
         cleaned_book = {
             "title": title,
@@ -116,7 +126,7 @@ def display_results(results):
         print(f"Author: {book['author']}")
         print(f"Year: {book['year']}")
         print(f"Editions: {book['editions']}")
-        print(f"Languages: {book['languages']}")
+        # print(f"Languages: {book['languages']}")
         print()
 
 def main():
@@ -130,8 +140,8 @@ def main():
         return
 
     records = process_data(data)
-
-    display_results(records)
+    cleaned_records = clean_data(records)
+    display_results(cleaned_records)
 
 
 if __name__ == "__main__":
