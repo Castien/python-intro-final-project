@@ -72,7 +72,7 @@ def process_data(data):
 # author : If missing, use "Unknown"
 # year : If missing or invalid, use 0
 # editions : If missing or invalid, use 0
-# languages : Leave out of the CSV
+# languages : Leave out of the CSV (for now)
 
 def clean_data(records):
     cleaned_records = []
@@ -80,6 +80,8 @@ def clean_data(records):
     for book in records:
         title = book["title"]
         author = book["author"]
+        year = book["year"]
+        editions = book["editions"]
 
         if title == "N/A":
             title = author
@@ -87,9 +89,17 @@ def clean_data(records):
         if author == "N/A":
             author = "Unknown"
 
+        if year == "N/A":
+            year = 0
+
+        if editions == "N/A":
+            editions = 0
+
         cleaned_book = {
             "title": title,
-            "author": author
+            "author": author,
+            "year": year,
+            "editions": editions
         }
 
         cleaned_records.append(cleaned_book)
