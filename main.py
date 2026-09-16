@@ -42,6 +42,7 @@
 
 import requests
 import csv
+import os
 
 # Replace with your chosen API endpoint
 API_URL = "https://openlibrary.org/search.json"  
@@ -118,7 +119,14 @@ def clean_data(records):
     return cleaned_records
 
 def export_csv(records, filename):
-    with open(filename, "w", newline="", encoding="utf-8") as csv_file:
+    output_directory = "output"
+
+    if not os.path.exists(output_directory):
+        os.mkdir(output_directory)
+
+    file_path = os.path.join(output_directory, filename)
+
+    with open(file_path, "w", newline="", encoding="utf-8") as csv_file:
         fieldnames = ["title", "author", "year", "editions"]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
