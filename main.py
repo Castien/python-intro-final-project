@@ -41,6 +41,7 @@
 
 
 import requests
+import csv
 
 # Replace with your chosen API endpoint
 API_URL = "https://openlibrary.org/search.json"  
@@ -116,6 +117,14 @@ def clean_data(records):
 
     return cleaned_records
 
+def export_csv(records, filename):
+    with open(filename, "w", newline="", encoding="utf-8") as csv_file:
+        fieldnames = ["title", "author", "year", "editions"]
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+        writer.writeheader()
+        writer.writerows(records)
+
 # def is_valid(book):
 #     return book["title"] != "N/A"
 
@@ -134,6 +143,7 @@ def main():
     if not author:
         print("Please enter an author's name.")
         return
+
     data = fetch_data(author)
     if not data:
         print("No results found.")
@@ -141,7 +151,9 @@ def main():
 
     records = process_data(data)
     cleaned_records = clean_data(records)
+
     display_results(cleaned_records)
+    export_csv(cleaned_records, "books.csv")
 
 
 if __name__ == "__main__":
