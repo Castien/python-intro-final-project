@@ -61,3 +61,25 @@ If no author is entered, the program asks the user to enter an author's name. AP
 
 * **Search by author** — enter an author's name to see a list of books associated with that author.
 * **Empty input** — if no author is entered, the program displays a message asking the user to provide an author's name.
+
+# Data Cleaning Decisions
+
+The program cleans the OpenLibrary API data, and then displays and exports the results.
+If a title is missing, the author's name is used as the title. 
+If the author is missing, it is replaced with "Unknown". 
+Missing or invalid publication years and edition counts are replaced with 0 to maintain int type.
+The languages field is not included in the cleaned CSV.
+
+# Extension
+
+The program cleans the book data and exports the results to a CSV file. 
+The cleaned CSV contains the fields title, author, year, and editions. 
+The CSV file is created in an output directory using Python's csv and os standard-library modules.
+
+# Project Option
+
+This project uses Option B: Clean, Process, and Export API Data.
+
+# Video Reflection
+
+Video link: [Link]
